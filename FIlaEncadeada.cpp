@@ -5,6 +5,7 @@ FilaEncadeada::FilaEncadeada(){
     NoFim = NULL;
     tamanho = 0;
     
+
 }
 
 FilaEncadeada::~FilaEncadeada(){
