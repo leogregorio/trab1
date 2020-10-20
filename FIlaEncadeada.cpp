@@ -1,11 +1,13 @@
 #include"FilaEncadeada.h"
+#include <iostream>
+
+
+using namespace std;
 
 FilaEncadeada::FilaEncadeada(){
     primeiro = NULL;
     NoFim = NULL;
     tamanho = 0;
-    
-
 }
 
 FilaEncadeada::~FilaEncadeada(){
@@ -41,15 +43,15 @@ int FilaEncadeada::getInicio() // volta no primeiro no
 
 void FilaEncadeada::enfileira(int val) // insere No no final da lista
 {
-    NoFila *p = new NoFila();
+    NoFila *p;
     p->setInfo(val);
     p->setProx(NULL);
 
     if(NoFim == NULL)
-        primeiro = p; 
+        primeiro = p;
     else
-        NoFim->setProx(p); 
-    NoFim = p; 
+        NoFim->setProx(p);
+    NoFim = p;
 }
 
 int FilaEncadeada::desenfileira() // elimina No do inicio

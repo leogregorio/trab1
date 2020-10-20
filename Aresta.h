@@ -1,5 +1,5 @@
-#ifndef ARESTA_H
-#define ARESTA_H
+#ifndef ARESTA_H_INCLUDED
+#define ARESTA_H_INCLUDED
 
 
 class Vertice;

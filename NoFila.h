@@ -13,6 +13,8 @@ public:
     void setProx(NoFila *p);
 
 private:
-    int info; 
-    NoFila *proximo; 
+    int info;
+    NoFila *proximo;
 };
+
+#endif

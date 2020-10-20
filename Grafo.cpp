@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <limits>
 #include <math.h>
+#include "NoFila.h"
+#include "FilaEncadeada.h"
+
 
 Grafo::Grafo(){
   this->n = 0;
@@ -93,7 +96,7 @@ bool Grafo::addAresta(int ID1, int ID2, double valor){
     a->conectarAresta(ID2, valor); a->grau++;
     b->conectarAresta(ID1, valor); b->grau++;
     this->m += 1;
-    
+
     return true;
   }
   else {
@@ -141,7 +144,7 @@ void Grafo::printVertices(){
   Vertice* p = this->rootVertice;
   Aresta* e;
   while(p != NULL){
-    std::cout << "[" << p->getID() << "] : " << " grau:" << p->grau << endl;  
+    std::cout << "[" << p->getID() << "] : " << " grau:" << p->grau << std::endl;
     e = p->getRootAresta();
     while(e != NULL){
       std::cout << e->getVerticeID() << "(" << e->getValor() << ") ";
@@ -162,7 +165,7 @@ int Grafo::getGrauMedio()
 }
 
 
-void Grafo::camLargura(int id_no, ofstream& saida){
+void Grafo::camLargura(int id_no, std::ofstream& saida){
     int* mapa = new int[this->getOrdem()];
     No* inic = this->getPrimeiroNo();
     bool* verificavisitado=new bool[this->ordem];
@@ -192,11 +195,11 @@ void Grafo::camLargura(int id_no, ofstream& saida){
             //um indice com 1(true) é porque é de retorno, caso contrario 0(false)nao é retorno.
             indice = mapeamento(mapa, auxiliar->getIdDestino());
             if(verificavisitado[indice] == false) {
-                saida<<"["<<noAux->getId()<<","<<auxiliar->getIdDestino()<<"] nao é retorno"<<endl;
+                saida<<"["<<noAux->getId()<<","<<auxiliar->getIdDestino()<<"] nao é retorno"<< std::endl;
                 verificavisitado[indice] = true;
                 fila->enfileira(auxiliar->getIdDestino());
             } else {
-                saida<<"["<<noAux->getId()<<" , "<<auxiliar->getIdDestino()<<"] é retorno"<<endl;
+                saida<<"["<<noAux->getId()<<" , "<<auxiliar->getIdDestino()<<"] é retorno"<< std::endl;
             }
             auxiliar = auxiliar->getProximaAresta();
         }

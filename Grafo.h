@@ -1,12 +1,11 @@
-#ifndef GRAFO_H
-#define GRAFO_H
+#ifndef GRAFO_H_INCLUDED
+#define GRAFO_H_INCLUDED
 
-
+#include <fstream>
 #include <vector>
 #include "Vertice.h"
 #include "Aresta.h"
 
-using namespace std;
 
 class Grafo {
 
@@ -38,7 +37,7 @@ class Grafo {
   void printVertices();
   int getGrauMedio();
 
-  void camLargura(int id_no, ofstream& saida);
+  void camLargura(int id_no, std::ofstream& saida);
 };
 
 

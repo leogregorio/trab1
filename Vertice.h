@@ -1,5 +1,5 @@
-#ifndef Vertice_H
-#define Vertice_H
+#ifndef Vertice_H_INCLUDED
+#define Vertice_H_INCLUDED
 
 
 class Aresta;
@@ -8,14 +8,14 @@ class Vertice {
 
   private:
 
-    
+
 
     double valor;
     Aresta* rootAresta;
 
     Vertice* proximo;
     int color;
-    
+
 
   public:
     int grau;
@@ -41,4 +41,4 @@ class Vertice {
     }
 };
 
-#endif // Vertice_H
+#endif

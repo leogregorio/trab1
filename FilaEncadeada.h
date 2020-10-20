@@ -2,7 +2,7 @@
 #define FILAENCADEADA_H_INCLUDED
 #include "NoFila.h"
 #include "Grafo.h"
-#include "No.h"
+
 
 class FilaEncadeada
 {
@@ -21,3 +21,6 @@ bool vazia(); // verifica se esta vazia
 int getTamanho();
 bool verificaElemento(int tamanho);
 };
+
+
+#endif
