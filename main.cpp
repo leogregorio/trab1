@@ -28,11 +28,12 @@ int main(int argc, const char* argv[])
 
     cout << "CRIANDO GRAFO" << endl;
 
-    Grafo g;
+    Grafo* g = new Grafo();
 
-    string arquivoEntrada = argv[1];
     ifstream entrada;
-    entrada.open(arquivoEntrada);
+    ofstream saida;
+    entrada.open(argv[1], ios::in);
+    saida.open(argv[2], ios::out | ios::trunc);
     
    
 
@@ -82,10 +83,14 @@ int main(int argc, const char* argv[])
                 cont++;
             }
 
+
             g.addAresta(encontraValor(v1),encontraValor(v2),encontraValor(val)); cout << "A: " << v1 << " , " << v2 << " v:" << encontraValor(val) << endl;
+                  
             cout << "grau de " << v1 << " :" << g.getVertice(encontraValor(v1))->grau << endl;
             cout << "grau de " << v2 << " :" << g.getVertice(encontraValor(v2))->grau << endl; 
             cout << "################################" << endl << endl;
+
+
             linhaatual++;
         }
         cout << "fechando arquivo, linhaatual = " << linhaatual << endl;
@@ -98,17 +103,6 @@ int main(int argc, const char* argv[])
     }
 
 
-
-
-    g.addAresta(2,3,11);
-    g.addAresta(3,0,12);
-    g.addAresta(3,4,112);
-    g.addAresta(4,1,5);
-    g.addAresta(4,0,25);
-    g.addAresta(0,2,48);
-    g.addAresta(1,3,1);
-    g.addAresta(1,2,6);
-    g.addAresta(2,4,71);
 
 
     g.printVertices();

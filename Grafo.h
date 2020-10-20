@@ -38,7 +38,7 @@ class Grafo {
   void printVertices();
   int getGrauMedio();
 
-  
+  void camLargura(int id_no, ofstream& saida);
 };
 
 
