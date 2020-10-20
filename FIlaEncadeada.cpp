@@ -4,10 +4,12 @@ FilaEncadeada::FilaEncadeada(){
     primeiro = NULL;
     NoFim = NULL;
     tamanho = 0;
+    
 }
 
 FilaEncadeada::~FilaEncadeada(){
  NoFila *p = primeiro;
+
     while(p != NULL)
     {
 
