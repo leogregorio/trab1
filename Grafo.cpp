@@ -160,3 +160,67 @@ int Grafo::getGrauMedio()
     soma += this->getVertice(i)->grau;
   return soma/this->getN();
 }
+
+
+void Grafo::camLargura(int id_no, ofstream& saida){
+    No* inic = this->getPrimeiroNo();
+    bool* verticeVisitado = new bool[this->n];
+    int indice;
+
+    //preenche o vetor com 0
+    for(int i = 0; i < this->n; i++, inic = inic->getProximoNo()){
+        mapaVertices[i] = inic->getId();
+        verticeVisitado[i] = false;
+    }
+
+    //Fila e ja coloca o no alvo como visitado
+    FilaEncadeada* fila = new FilaEncadeada();
+    indice = detIndice(mapaVertices, id_no);
+    verticeVisitado[indice]=true;
+
+    //adiciona o primeir vertice à fila 
+    fila->enfileira(id_no);
+
+ 
+    No* noAux;
+    
+    while(!fila->vazia()){
+        noAux = this->getNo(fila->desenfileira()); //retirando vertice da fila
+        Aresta* auxiliar = noAux->getPrimeiraAresta();
+        while(auxiliar!=NULL){
+            indice = detIndice(mapaVertices, auxiliar->getIdDestino());
+            if(verticeVisitado[indice] == false) {
+                saida<<"["<<noAux->getId()<<","<<auxiliar->getIdDestino()<<"] nao é retorno"<<endl;
+                verticeVisitado[indice] = true;
+                fila->enfileira(auxiliar->getIdDestino());
+            } else {
+                saida<<"["<<noAux->getId()<<" , "<<auxiliar->getIdDestino()<<"] é retorno"<<endl;
+            }
+            auxiliar = auxiliar->getProximaAresta();
+        }
+    }
+}
+
+
+
+/*
+vector<int> Grafo::getVerticeIDList(){
+  vector<int> ids;
+  Vertice* p = this->rootVertice;
+  while(p != NULL){
+    ids.push_back(p->getID());
+    p = p->getProximo();
+  }
+  return ids;
+}
+
+*/
+
+/*
+int Grafo::detIndice(int* mapaVertices, int id) {
+    for(int i=0; i < this->getOrdem(); i++) {
+        if(mapaVertices[i] == id)
+            return i;
+    }
+}
+*/
