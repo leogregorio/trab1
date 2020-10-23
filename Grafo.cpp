@@ -5,9 +5,6 @@
 #include <algorithm>
 #include <limits>
 #include <math.h>
-#include "NoFila.h"
-#include "FilaEncadeada.h"
-
 
 Grafo::Grafo(){
   this->n = 0;
@@ -96,7 +93,7 @@ bool Grafo::addAresta(int ID1, int ID2, double valor){
     a->conectarAresta(ID2, valor); a->grau++;
     b->conectarAresta(ID1, valor); b->grau++;
     this->m += 1;
-
+    
     return true;
   }
   else {
@@ -144,7 +141,7 @@ void Grafo::printVertices(){
   Vertice* p = this->rootVertice;
   Aresta* e;
   while(p != NULL){
-    std::cout << "[" << p->getID() << "] : " << " grau:" << p->grau << std::endl;
+    std::cout << "[" << p->getID() << "] : " << " grau:" << p->grau << endl;  
     e = p->getRootAresta();
     while(e != NULL){
       std::cout << e->getVerticeID() << "(" << e->getValor() << ") ";
@@ -163,69 +160,3 @@ int Grafo::getGrauMedio()
     soma += this->getVertice(i)->grau;
   return soma/this->getN();
 }
-
-
-void Grafo::camLargura(int id_no, std::ofstream& saida){
-    int* mapa = new int[this->getOrdem()];
-    No* inic = this->getPrimeiroNo();
-    bool* verificavisitado=new bool[this->ordem];
-    int indice;
-
-    //preenche o vetor com 0
-    for(int i = 0; i < this->ordem; i++, inic = inic->getProximoNo()){
-        mapa[i] = inic->getId();
-        verificavisitado[i]=false;
-    }
-
-    //Fila e ja coloca o no alvo como visitado
-    FilaEncadeada* fila = new FilaEncadeada();
-    indice = mapeamento(mapa, id_no);
-    verificavisitado[indice]=true;
-
-    //começa a fila com o primeiro vertice visitado
-    fila->enfileira(id_no);
-
-    //repetição até a fila ficar vazia
-    No* noAux;
-    while(fila->vazia()==false){
-        noAux = this->getNo(fila->desenfileira());
-        Aresta* auxiliar = noAux->getPrimeiraAresta();
-        while(auxiliar!=NULL){
-            //quando ele visita um nó, ele marca no vetor de bool no indice tal como "1" ou "0", se o destino da aresta ja for
-            //um indice com 1(true) é porque é de retorno, caso contrario 0(false)nao é retorno.
-            indice = mapeamento(mapa, auxiliar->getIdDestino());
-            if(verificavisitado[indice] == false) {
-                saida<<"["<<noAux->getId()<<","<<auxiliar->getIdDestino()<<"] nao é retorno"<< std::endl;
-                verificavisitado[indice] = true;
-                fila->enfileira(auxiliar->getIdDestino());
-            } else {
-                saida<<"["<<noAux->getId()<<" , "<<auxiliar->getIdDestino()<<"] é retorno"<< std::endl;
-            }
-            auxiliar = auxiliar->getProximaAresta();
-        }
-    }
-}
-
-
-
-/*
-vector<int> Grafo::getVerticeIDList(){
-  vector<int> ids;
-  Vertice* p = this->rootVertice;
-  while(p != NULL){
-    ids.push_back(p->getID());
-    p = p->getProximo();
-  }
-  return ids;
-}
-
-*/
-
-/*
-int Grafo::mapeamento(int* mapa, int id) {
-    for(int i=0; i < this->getOrdem(); i++) {
-        if(mapa[i] == id)
-            return i;
-    }
-}
-*/
